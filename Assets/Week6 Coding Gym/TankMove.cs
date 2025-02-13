@@ -8,11 +8,6 @@ public class TankMove : MonoBehaviour
     public float speed;
     public Slider speedSlider;
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
