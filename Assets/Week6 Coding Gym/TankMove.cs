@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TankMove : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed;
+    public Slider speedSlider;
 
     void Start()
     {
@@ -14,6 +16,7 @@ public class TankMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed = speedSlider.value;
         Vector2 pos = transform.position;       // Create new Vector2 called pos that is equal to the obejcts position
         if (Input.GetKey(KeyCode.D))            // if either D, A, W, or S are pressed, move character accordingly with speed
         {

@@ -14,8 +14,9 @@ public class BarrelAim : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 direction = mousePos - transform.position;
+        mousePos.z = 0;
+        Vector2 direction = mousePos - transform.position;
 
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+        transform.right = direction;
     }
 }
