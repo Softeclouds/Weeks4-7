@@ -18,6 +18,8 @@ public class SpawnerDropDown : MonoBehaviour
     private GameObject previewItem;
     private SpriteRenderer previewSprite;
 
+    private List<GameObject> placedItems = new List<GameObject>();
+
     void Start()
     {
         currentItem = items[0]; // start the currentItem at the first option
@@ -68,10 +70,12 @@ public class SpawnerDropDown : MonoBehaviour
 
     void placeItem(Vector3 pos) // a vector3 is fed into this function to determine where its placed
     {
-        GameObject placedItem = Instantiate(currentItem, pos, Quaternion.identity); // place item
+        GameObject placedItem = Instantiate(currentItem, pos, Quaternion.identity); // instantiate item
        
         SpriteRenderer placedSprite = placedItem.GetComponent<SpriteRenderer>(); // getting the sprite renderer from the current placed item
         placedSprite.sortingOrder = (int)slider.value; // drawing the sprite in the correct layer according to the slider
+
+        placedItems.Add(placedItem); // add item to list so it can be destroyed later
     }
 
     // update the sprite previews sorting layer if the slider value has changed
@@ -95,5 +99,16 @@ public class SpawnerDropDown : MonoBehaviour
         {
             showPreview();
         }
+    }
+
+    public void clearAll()
+    {
+        // for all placed objects, destroy them
+        foreach (GameObject item in placedItems)
+        {
+            Destroy(item);
+        }
+
+        placedItems.Clear(); // clear list
     }
 }
