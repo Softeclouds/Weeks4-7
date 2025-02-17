@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class BackgroundDropDown : MonoBehaviour
 {
-    public Image background;
+    public SpriteRenderer sr;
     public Sprite[] backgroundSprites;
     // Start is called before the first frame update
     void Start()
@@ -15,6 +15,6 @@ public class BackgroundDropDown : MonoBehaviour
 
     public void changeSprite(int index)
     {
-        background.sprite = backgroundSprites[index];
+        sr.sprite = backgroundSprites[index];
     }
 }
