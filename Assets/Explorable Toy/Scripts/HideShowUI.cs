@@ -10,9 +10,6 @@ public class HideShowUI : MonoBehaviour
     public GameObject panel;
     public TextMeshProUGUI buttonText;
 
-    public float panelShown;
-    public float panelHidden;
-
     void Update()
     {
         if (isShowing)

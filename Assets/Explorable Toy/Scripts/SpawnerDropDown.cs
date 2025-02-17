@@ -6,6 +6,8 @@ using TMPro;
 
 public class SpawnerDropDown : MonoBehaviour
 {
+    bool isShowing = true;
+
     public GameObject[] items;
     private GameObject currentItem;
     public Slider slider;
@@ -78,6 +80,20 @@ public class SpawnerDropDown : MonoBehaviour
         if (previewSprite != null)
         {
             previewSprite.sortingOrder = (int)value;
+        }
+    }
+
+    // stop drawing the preview if the UI panel is hidden
+    public void disablePreview()
+    {
+        isShowing = !isShowing;
+        if(!isShowing)
+        {
+            Destroy(previewItem);
+        }
+        else
+        {
+            showPreview();
         }
     }
 }
