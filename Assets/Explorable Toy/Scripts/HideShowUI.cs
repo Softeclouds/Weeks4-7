@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HideShowUI : MonoBehaviour
 {
     bool isShowing = true;
     public GameObject panel;
-    public Button button;
+    public TextMeshProUGUI buttonText;
 
     public float panelShown;
     public float panelHidden;
@@ -16,22 +17,18 @@ public class HideShowUI : MonoBehaviour
     {
 
     }
-
-    // Update is called once per frame
     void Update()
     {
-        Vector2 pos = button.transform.position;
         if (isShowing)
         {
-            pos.x = panelShown;
+            buttonText.text = "Hide UI";
         }
         else
         {
-            pos.x = panelHidden;
+            buttonText.text = "Show UI";
         }
-        button.transform.position = pos;
-    }
 
+    }
     public void hideShow()
     {
         isShowing = !isShowing;
