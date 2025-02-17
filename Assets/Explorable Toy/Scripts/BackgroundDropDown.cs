@@ -7,14 +7,10 @@ public class BackgroundDropDown : MonoBehaviour
 {
     public SpriteRenderer sr;
     public Sprite[] backgroundSprites;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void changeSprite(int index)
     {
+        // change sprites based on the index in the array to switch between the options
         sr.sprite = backgroundSprites[index];
     }
 }

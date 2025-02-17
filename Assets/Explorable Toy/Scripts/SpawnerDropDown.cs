@@ -2,37 +2,82 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SpawnerDropDown : MonoBehaviour
 {
     public GameObject[] items;
     private GameObject currentItem;
     public Slider slider;
+
+    public TextMeshProUGUI layerText;
+
     private SpriteRenderer sprite;
+    private GameObject previewItem;
+    private SpriteRenderer previewSprite;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        currentItem = items[0];
-
+        currentItem = items[0]; // start the currentItem at the first option
+        showPreview(); // show the preview
     }
 
-    // Update is called once per frame
     void Update()
     {
+        layerText.text = "Layer: " + slider.value; // shows the text with the layer value
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0;
+        if (previewItem != null)
+        {
+            // set the preview item to follow the mouse position
+            previewItem.transform.position = mousePos;
+        }
+
+        // if the rmb is pressed place an item at the mouse position
         if (Input.GetMouseButtonDown(1))
         {
-            GameObject spawnedItems = Instantiate(currentItem, mousePos, Quaternion.identity);
+            placeItem(mousePos);
         }
     }
 
     public void changeItem(int index)
     {
+        // sets the currentItem to the item in the array with that index
         currentItem = items[index];
+        showPreview(); // showing preview again to change the drawn preview sprite
+    }
+
+    void showPreview() // Showing a preview of what the spawned item would look like
+    {
+        if (previewItem != null) // if there is already a preview, destroy it
+        {
+            Destroy(previewItem);
+        }
+
+        // draw the previewed item with the correct sprite
+        // the showPreview function isnt constantly so we cant update its postition here
+        previewItem = Instantiate(currentItem, Vector3.zero, Quaternion.identity);
+        previewSprite = previewItem.GetComponent<SpriteRenderer>();
+
+        // draw the preview on the sorting layer according to the slider
+        previewSprite.sortingOrder = (int)slider.value;
+    }
+
+    void placeItem(Vector3 pos) // a vector3 is fed into this function to determine where its placed
+    {
+        GameObject placedItem = Instantiate(currentItem, pos, Quaternion.identity); // place item
+       
+        SpriteRenderer placedSprite = placedItem.GetComponent<SpriteRenderer>(); // getting the sprite renderer from the current placed item
+        placedSprite.sortingOrder = (int)slider.value; // drawing the sprite in the correct layer according to the slider
+    }
+
+    // update the sprite previews sorting layer if the slider value has changed
+    public void OnSliderValueChanged(float value)
+    {
+        if (previewSprite != null)
+        {
+            previewSprite.sortingOrder = (int)value;
+        }
     }
 }

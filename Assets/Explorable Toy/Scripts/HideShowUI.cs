@@ -12,11 +12,7 @@ public class HideShowUI : MonoBehaviour
 
     public float panelShown;
     public float panelHidden;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
     void Update()
     {
         if (isShowing)
