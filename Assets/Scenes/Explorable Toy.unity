@@ -3836,8 +3836,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 2853551577876818521, guid: d627126d83f6ca44fb76b371df3855e5, type: 3}
-  - {fileID: 0}
+  - {fileID: 6184489520061662935, guid: eafeb88e13bb85e468199d191dd9c7e3, type: 3}
   - {fileID: 2778496215430170634, guid: da516abb8ee7c9d4ca929103d6fe6b52, type: 3}
+  - {fileID: 797848074641114581, guid: d297f1490948c334c9c9a717682522ef, type: 3}
+  - {fileID: 1544920000977052488, guid: dbbef8f7ce544d74ea96c085dad0cdce, type: 3}
   slider: {fileID: 1333012033}
   layerText: {fileID: 883643987}
 --- !u!114 &1812768040
@@ -3895,6 +3897,10 @@ MonoBehaviour:
     - m_Text: Tree2
       m_Image: {fileID: 0}
     - m_Text: Bush
+      m_Image: {fileID: 21300000, guid: f9ca254be24484c4ca2c8174aaaa1553, type: 3}
+    - m_Text: Mushroom1
+      m_Image: {fileID: 21300000, guid: f9ca254be24484c4ca2c8174aaaa1553, type: 3}
+    - m_Text: Star
       m_Image: {fileID: 21300000, guid: f9ca254be24484c4ca2c8174aaaa1553, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
