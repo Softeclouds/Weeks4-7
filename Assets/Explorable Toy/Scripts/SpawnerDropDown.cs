@@ -20,12 +20,19 @@ public class SpawnerDropDown : MonoBehaviour
     private GameObject previewItem;
     private SpriteRenderer previewSprite;
 
+    public Slider timer;
+
     private List<GameObject> placedItems = new List<GameObject>();
+
+    float t = 0f;
+    public float timerT;
+    bool isClearing = false;
 
     void Start()
     {
         currentItem = items[0]; // start the currentItem at the first option
         showPreview(); // show the preview
+
     }
 
     void Update()
@@ -47,12 +54,30 @@ public class SpawnerDropDown : MonoBehaviour
         {
             placeItem(mousePos);
         }
+
+        if (isClearing)
+        {
+            t += Time.deltaTime;
+            timer.value = t % timer.maxValue; // Update the slider according to the time
+
+            if (t >= timerT) // After the timer is up, clear objects
+            {
+                foreach (GameObject item in placedItems) // looping over all items in the list to destroy themif
+                {
+                    Destroy(item);
+                }
+
+                placedItems.Clear(); // Clear the list
+                isClearing = false; // Stop clearing
+            }
+        }
     }
 
     public void changeItem(int index)
     {
         // sets the currentItem to the item in the array with that index
         currentItem = items[index];
+
         showPreview(); // showing preview again to change the drawn preview sprite
     }
 
@@ -109,13 +134,8 @@ public class SpawnerDropDown : MonoBehaviour
 
     public void clearAll()
     {
-        // for all placed objects, destroy them
-        foreach (GameObject item in placedItems)
-        {
-            Destroy(item);
-        }
-
-        placedItems.Clear(); // clear list
+        t = 0f; // Reset the timer
+        isClearing = true; // Start the timer to clear items
     }
 
     public void flipX()
@@ -127,4 +147,6 @@ public class SpawnerDropDown : MonoBehaviour
             previewSprite.flipX = isFlipped; // flip x if the toggle is triggered
         }
     }
+
+
 }
