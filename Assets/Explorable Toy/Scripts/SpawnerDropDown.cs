@@ -8,6 +8,8 @@ public class SpawnerDropDown : MonoBehaviour
 {
     bool isShowing = true;
 
+    public bool isFlipped = false;
+
     public GameObject[] items;
     private GameObject currentItem;
     public Slider slider;
@@ -36,6 +38,8 @@ public class SpawnerDropDown : MonoBehaviour
         {
             // set the preview item to follow the mouse position
             previewItem.transform.position = mousePos;
+
+      
         }
 
         // if the rmb is pressed place an item at the mouse position
@@ -62,8 +66,8 @@ public class SpawnerDropDown : MonoBehaviour
         // draw the previewed item with the correct sprite
         // the showPreview function isnt constantly so we cant update its postition here
         previewItem = Instantiate(currentItem, Vector3.zero, Quaternion.identity);
-        previewSprite = previewItem.GetComponent<SpriteRenderer>();
 
+        previewSprite = previewItem.GetComponent<SpriteRenderer>();
         // draw the preview on the sorting layer according to the slider
         previewSprite.sortingOrder = (int)slider.value;
     }
@@ -74,6 +78,8 @@ public class SpawnerDropDown : MonoBehaviour
        
         SpriteRenderer placedSprite = placedItem.GetComponent<SpriteRenderer>(); // getting the sprite renderer from the current placed item
         placedSprite.sortingOrder = (int)slider.value; // drawing the sprite in the correct layer according to the slider
+
+        placedSprite.flipX = isFlipped; // flip x if the toggle is triggered
 
         placedItems.Add(placedItem); // add item to list so it can be destroyed later
     }
@@ -110,5 +116,15 @@ public class SpawnerDropDown : MonoBehaviour
         }
 
         placedItems.Clear(); // clear list
+    }
+
+    public void flipX()
+    {
+        isFlipped = !isFlipped;
+        
+        if (previewSprite != null)
+        {
+            previewSprite.flipX = isFlipped; // flip x if the toggle is triggered
+        }
     }
 }
